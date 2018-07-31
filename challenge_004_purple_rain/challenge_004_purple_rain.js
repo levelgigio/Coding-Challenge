@@ -29,8 +29,7 @@ function Splash(gota) {
     this.espessura = gota.espessura;
     this.mod_velocidade = -gota.velocidade/1.5;
     this.angulo = map(gota.velocidade, 2, 5, 63.0*3.14/180.0, 70.0*3.14/180.0);
-    this.velx1 = Math.cos(this.angulo)*this.mod_velocidade;
-    this.velx2 = Math.cos(this.angulo)*this.mod_velocidade;
+    this.velx = Math.cos(this.angulo)*this.mod_velocidade;
     this.vely = Math.sin(this.angulo)*this.mod_velocidade;
     this.draw = function() {
         noFill();
@@ -41,8 +40,8 @@ function Splash(gota) {
     this.update = function() {
         this.vely += 1;
         this.y += this.vely;
-        this.x1 += this.velx1;
-        this.x2 -= this.velx2;
+        this.x1 += this.velx;
+        this.x2 -= this.velx;
     }
 }
 
@@ -68,9 +67,7 @@ function draw() {
     for (var i = 0; i < splashs.length; i++) {
         splashs[i].draw();
         splashs[i].update();
-        if(splashs[i].y > altura + 10) {
+        if(splashs[i].y > altura + 10)
             splashs.splice(i, 1);
-        }
-            
     }
 }
